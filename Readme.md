@@ -1,5 +1,23 @@
 ## DevOps Assessment Assignment
 
+### Overview
+
+**Key components**
+
+- **Backend** (`backend/main.py`) – FastAPI app: `POST /notify/` enqueues a Celery task, `GET /task_status/{task_id}` returns status/result.
+- **Worker** (`backend/worker.py`) – Celery worker that runs the background task.
+- **Redis** – Message broker and result backend for Celery.
+- **Frontend** (`frontend/index.html`) – Single page that triggers a task and polls until it’s done.
+
+**Run locally (no Docker)**
+
+1. Start Redis.
+2. From project root: `cd backend && python -m venv venv`, activate venv, `pip install -r ../requirements.txt`.
+3. Terminal 1: `cd backend && celery -A worker worker --loglevel=info`.
+4. Terminal 2: `cd backend && uvicorn main:app --reload --port 8000`.
+5. Serve frontend: simply open index.html in browser.
+---
+
 Design and implement a workflow to:
 
 - **Containerize the application**
@@ -25,7 +43,7 @@ Design and implement a workflow to:
 - **Deliverables**
   - updated code base with IAC and build related code.
   - document your journey in `journey.md` file.
-  - create `instructions.md` file for developers to run this locally.
+  - create `instructions.md` file for developers to run containerized setup locally.
   - simple architecture diagram to showcase cloud resources.
   - single-page frontend in `frontend/index.html` that:
     - calls the `POST /notify/` API to trigger a background task.
