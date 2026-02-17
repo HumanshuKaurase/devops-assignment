@@ -1,3 +1,19 @@
+name: CI-CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  AWS_REGION: ap-south-1
+  ECR_BACKEND_REPO: devops-assignment-backend
+  ECR_WORKER_REPO: devops-assignment-worker
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
