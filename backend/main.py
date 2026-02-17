@@ -1,39 +1,62 @@
-from fastapi import FastAPI
+import os
+from celery import Celery
 from celery.result import AsyncResult
+from fastapi import FastAPI
 from worker import write_log_celery
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+# 🔑 Redis config via ENV variables
+REDIS_HOST = os.getenv("REDIS_HOST", "redis")
+REDIS_PORT = os.getenv("REDIS_PORT", "6379")
+
+CELERY_BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/0"
+CELERY_RESULT_BACKEND = f"redis://{REDIS_HOST}:{REDIS_PORT}/0"
+
+celery_app = Celery(
+    "worker",
+    broker=CELERY_BROKER_URL,
+    backend=CELERY_RESULT_BACKEND
 )
 
+# ------------------------
+# API ROUTES (IMPORTANT)
+# ------------------------
 
 @app.post("/notify/")
 async def notify_user(email: str):
-    """Endpoint that triggers the background task in Celery."""
+    """Trigger background task"""
     task = write_log_celery.delay(f"Notification sent to {email}")
-    # task is a AsyncResult, a promise to a result that will be available later.
-    return {"message": f"Email will be sent to {email}", "task_id": task.id}
+    return {
+        "message": f"Email will be sent to {email}",
+        "task_id": task.id
+    }
 
 
 @app.get("/task_status/{task_id}")
 async def get_task_status(task_id: str):
-    """Endpoint to check the status of the task."""
-    task_result = AsyncResult(task_id)  # Get the task result using the task ID
-    if task_result.ready():  # If the task is done
-        return {"task_id": task_id, "status": "completed", "result": task_result.result}
-    elif task_result.failed():  # If the task failed
-        return {"task_id": task_id, "status": "failed"}
-    else:  # If the task is still in progress
-        return {"task_id": task_id, "status": "in progress"}
+    """Check task status"""
+    task_result = AsyncResult(task_id)
 
-@app.post("/health/")
+    if task_result.successful():
+        return {
+            "task_id": task_id,
+            "status": "completed",
+            "result": task_result.result
+        }
+    elif task_result.failed():
+        return {
+            "task_id": task_id,
+            "status": "failed"
+        }
+    else:
+        return {
+            "task_id": task_id,
+            "status": "in progress"
+        }
+
+
+@app.get("/health")
 async def health():
-    """Endpoint that checks the health of the application."""
-    return {"message": "OK"}
+    return {"status": "OK"}
+
