@@ -1,1 +1,15 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environments
+venv/
+myproj-314/
+
+# Docker
+*.log
+
+# OS
+.DS_Store
 venv
