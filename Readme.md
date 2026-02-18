@@ -48,36 +48,36 @@ ECS Fargate (Celery Worker)
 
 devops-assignment/
 │
-├── backend/                         # Backend application
-│   ├── main.py                      # FastAPI app (API endpoints)
-│   ├── worker.py                    # Celery worker
-│   ├── Dockerfile                   # Backend Docker image
-│   ├── Dockerfile.worker            # Worker Docker image
+├── backend/                     # Backend application
+│   ├── main.py                  # FastAPI app (API endpoints)
+│   ├── worker.py                # Celery worker
+│   ├── Dockerfile               # Backend Docker image
+│   ├── Dockerfile.worker        # Worker Docker image
 │   └── __init__.py
 │
-├── frontend/                        # Simple UI
-│   └── index.html                   # Triggers API & polls task status
+├── frontend/                    # Simple UI
+│   └── index.html               # Triggers API & polls task status
 │
-├── infra-terraform/                 # Infrastructure as Code (Terraform)
-│   ├── main.tf                      # Provider & common config
-│   ├── variables.tf                 # Input variables
-│   ├── ecr.tf                       # ECR repositories
-│   ├── ecs.tf                       # ECS cluster & security group
-│   ├── task.tf                      # ECS task definitions
-│   ├── ecs_service.tf               # ECS services (Fargate)
-│   ├── alb.tf                       # Application Load Balancer
-│   ├── redis.tf                     # ElastiCache (Redis)
-│   └── outputs.tf                   # ALB & ECR outputs
+├── infra-terraform/             # Infrastructure as Code (Terraform)
+│   ├── main.tf                  # Provider & common config
+│   ├── variables.tf             # Input variables
+│   ├── ecr.tf                   # ECR repositories
+│   ├── ecs.tf                   # ECS cluster & security group
+│   ├── task.tf                  # ECS task definitions
+│   ├── ecs_service.tf           # ECS services (Fargate)
+│   ├── alb.tf                   # Application Load Balancer
+│   ├── redis.tf                 # ElastiCache (Redis)
+│   └── outputs.tf               # ALB & ECR outputs
 │
 ├── .github/
 │   └── workflows/
-│       └── ci-cd.yml                # CI/CD pipeline (GitHub Actions)
+│       └── ci-cd.yml            # CI/CD pipeline (GitHub Actions)
 │
-├── docker-compose.yml               # Local container setup
-├── requirements.txt                 # Python dependencies
-├── instructions.md                  # Developer setup guide
-├── journey.md                       # Design & implementation journey
-└── README.md                        # Project documentation
+├── docker-compose.yml           # Local container setup
+├── requirements.txt             # Python dependencies
+├── instructions.md              # Developer setup guide
+├── journey.md                   # Design & implementation journey
+└── README.md                    # Project documentation
 
 ---
 
