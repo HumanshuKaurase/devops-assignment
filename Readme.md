@@ -47,39 +47,37 @@ ECS Fargate (Celery Worker)
 ## 📂 Repository Structure
 
 devops-assignment/
-│
-├── backend/                     # Backend application
-│   ├── main.py                  # FastAPI app (API endpoints)
-│   ├── worker.py                # Celery worker
-│   ├── Dockerfile               # Backend Docker image
-│   ├── Dockerfile.worker        # Worker Docker image
+├── backend/
+│   ├── main.py
+│   ├── worker.py
+│   ├── Dockerfile
+│   ├── Dockerfile.worker
 │   └── __init__.py
 │
-├── frontend/                    # Simple UI
-│   └── index.html               # Triggers API & polls task status
+├── frontend/
+│   └── index.html
 │
-├── infra-terraform/             # Infrastructure as Code (Terraform)
-│   ├── main.tf                  # Provider & common config
-│   ├── variables.tf             # Input variables
-│   ├── ecr.tf                   # ECR repositories
-│   ├── ecs.tf                   # ECS cluster & security group
-│   ├── task.tf                  # ECS task definitions
-│   ├── ecs_service.tf           # ECS services (Fargate)
-│   ├── alb.tf                   # Application Load Balancer
-│   ├── redis.tf                 # ElastiCache (Redis)
-│   └── outputs.tf               # ALB & ECR outputs
+├── infra-terraform/
+│   ├── main.tf
+│   ├── variables.tf
+│   ├── ecr.tf
+│   ├── ecs.tf
+│   ├── task.tf
+│   ├── ecs_service.tf
+│   ├── alb.tf
+│   ├── redis.tf
+│   └── outputs.tf
 │
 ├── .github/
 │   └── workflows/
-│       └── ci-cd.yml            # CI/CD pipeline (GitHub Actions)
+│       └── ci-cd.yml
 │
-├── docker-compose.yml           # Local container setup
-├── requirements.txt             # Python dependencies
-├── instructions.md              # Developer setup guide
-├── journey.md                   # Design & implementation journey
-└── README.md                    # Project documentation
+├── docker-compose.yml
+├── requirements.txt
+├── instructions.md
+├── journey.md
+└── README.md
 
----
 
 ## ⚙️ Application Components
 
