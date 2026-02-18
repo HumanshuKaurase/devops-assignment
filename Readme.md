@@ -46,6 +46,8 @@ ECS Fargate (Celery Worker)
 
 ## 📂 Repository Structure
 
+**High-level flow:**
+
 devops-assignment/
 ├── backend/
 │   ├── main.py
