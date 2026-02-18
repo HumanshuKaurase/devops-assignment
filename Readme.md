@@ -55,7 +55,7 @@ ECS Fargate (Celery Worker)
 
 ## 📂 Repository Structure
 
-```
+
 
 devops-assignment/
 ├── backend/
@@ -89,7 +89,7 @@ devops-assignment/
 ├── journey.md
 └── README.md
 
-````
+
 
 ---
 
