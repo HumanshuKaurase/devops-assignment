@@ -1,50 +1,131 @@
-## DevOps Assessment Assignment
+Perfect 👍 Below is the **fully corrected, GitHub-safe README code**.
+You can **copy-paste this entire content directly into `README.md`** — it will render correctly without any issues.
 
-### Overview
-
-**Key components**
-
-- **Backend** (`backend/main.py`) – FastAPI app: `POST /notify/` enqueues a Celery task, `GET /task_status/{task_id}` returns status/result.
-- **Worker** (`backend/worker.py`) – Celery worker that runs the background task.
-- **Redis** – Message broker and result backend for Celery.
-- **Frontend** (`frontend/index.html`) – Single page that triggers a task and polls until it’s done.
-
-**Run locally (no Docker)**
-
-1. Start Redis.
-2. From project root: `cd backend && python -m venv venv`, activate venv, `pip install -r ../requirements.txt`.
-3. Terminal 1: `cd backend && celery -A worker worker --loglevel=info`.
-4. Terminal 2: `cd backend && uvicorn main:app --reload --port 8000`.
-5. Serve frontend: simply open index.html in browser.
 ---
 
-Design and implement a workflow to:
+```md
+# DevOps Assessment Assignment
 
-- **Containerize the application**
-  - Build Docker images for the existing backend.
-  - Provide a setup to run the app locally.
-  - Identify all the hardcoded values and replace those with environment variables.
-  - Include any required local dependencies (e.g. message broker, database) as containers.
+## 📌 Overview
+This project demonstrates a complete **DevOps workflow** for a backend system using **FastAPI, Celery, Redis**, containerization, **Infrastructure as Code (Terraform)**, and **CI/CD with GitHub Actions**, deployed on **AWS managed services**.
 
-- **Run containers locally**
-  - Provide clear commands to:
-    - Build images.
-    - Start the full stack.
-    - View logs and debug.
+The solution focuses on:
+- Containerization best practices
+- Infrastructure provisioning using Terraform
+- CI/CD automation
+- Cloud-native deployment using AWS ECS Fargate
+- Managed Redis using Amazon ElastiCache
+- Observability using CloudWatch Logs
 
-- **Deploy to a cloud provider using code (no manual clicks)**
-  - Use **Infrastructure as Code (IaC)** to provision all cloud resources.
-  - Use **CI/CD** (GitHub Actions, GitLab CI, Azure DevOps, etc.) to build, push images, and deploy the app.
+---
 
-- **Maximize managed cloud services**
-  - Prefer managed services over self-hosted where possible.
-  - Use cloud-native logging/monitoring where reasonable (e.g. CloudWatch, Azure Monitor, Stackdriver).
+## 🏗️ Architecture Overview
 
-- **Deliverables**
-  - updated code base with IAC and build related code.
-  - document your journey in `journey.md` file.
-  - create `instructions.md` file for developers to run containerized setup locally.
-  - simple architecture diagram to showcase cloud resources.
-  - single-page frontend in `frontend/index.html` that:
-    - calls the `POST /notify/` API to trigger a background task.
-    - polls the `GET /task_status/{task_id}` API to show live task status and result.
+### High-level flow
+
+```
+
+Browser / Client
+|
+v
+Application Load Balancer (ALB)
+|
+v
+ECS Fargate (FastAPI Backend)
+|
+v
+Amazon ElastiCache (Redis)
+|
+v
+ECS Fargate (Celery Worker)
+
+```
+
+### AWS Services Used
+- Amazon ECS (Fargate)
+- Application Load Balancer (ALB)
+- Amazon ElastiCache (Redis)
+- Amazon ECR
+- AWS CloudWatch Logs
+- AWS IAM
+- Terraform (IaC)
+- GitHub Actions (CI/CD)
+
+---
+
+## 📂 Repository Structure
+
+
+
+devops-assignment/
+├── backend/
+│   ├── main.py
+│   ├── worker.py
+│   ├── Dockerfile
+│   ├── Dockerfile.worker
+│   └── **init**.py
+│
+├── frontend/
+│   └── index.html
+│
+├── infra-terraform/
+│   ├── main.tf
+│   ├── variables.tf
+│   ├── ecr.tf
+│   ├── ecs.tf
+│   ├── task.tf
+│   ├── ecs_service.tf
+│   ├── alb.tf
+│   ├── redis.tf
+│   └── outputs.tf
+│
+├── .github/
+│   └── workflows/
+│       └── ci-cd.yml
+│
+├── docker-compose.yml
+├── requirements.txt
+├── instructions.md
+├── journey.md
+└── README.md
+
+
+
+---
+
+## ⚙️ Application Components
+
+### Backend – FastAPI
+- `POST /notify/` → Enqueues a Celery task
+- `GET /task_status/{task_id}` → Returns task status
+- `GET /health` → Health check endpoint
+
+### Worker – Celery
+- Consumes tasks from Redis
+- Processes background jobs asynchronously
+
+### Redis
+- Used as Celery broker and result backend
+- Managed using Amazon ElastiCache in AWS
+
+### Frontend
+- Simple HTML UI
+- Triggers background task and polls status
+
+---
+
+## 🐳 Run Locally (Docker Compose)
+
+### Prerequisites
+- Docker
+- Docker Compose
+
+### Commands
+```bash
+docker compose build
+docker compose up
+````
+
+```
+
+
