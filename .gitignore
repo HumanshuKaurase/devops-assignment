@@ -1,15 +1,5 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
+# Terraform
+.terraform/
+terraform.tfstate
+terraform.tfstate.*
 
-# Virtual environments
-venv/
-myproj-314/
-
-# Docker
-*.log
-
-# OS
-.DS_Store
-venv
