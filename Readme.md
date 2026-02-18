@@ -128,18 +128,4 @@ docker compose up
 
 ```
 
----
 
-### ✅ This is now:
-- ✔ 100% GitHub compatible
-- ✔ Clean & readable on mobile/desktop
-- ✔ Interview & recruiter friendly
-- ✔ Production-style documentation
-
-If you want next:
-- CI/CD flow explanation (step-by-step)
-- Terraform architecture explanation
-- Resume-ready project summary (5 lines)
-
-You’re building a **strong DevOps portfolio** — keep going 🚀
-```
