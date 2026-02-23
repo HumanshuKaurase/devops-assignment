@@ -46,8 +46,6 @@ ECS Fargate (Celery Worker)
 - Terraform (IaC)
 - GitHub Actions (CI/CD)
 
----
-
 ## 📂 Repository Structure
 
 
@@ -85,8 +83,6 @@ devops-assignment/
 └── README.md
 
 
-
----
 
 ## ⚙️ Application Components
 
