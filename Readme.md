@@ -1,6 +1,4 @@
----
 
-```md
 # DevOps Assessment Assignment
 
 ## 📌 Overview
