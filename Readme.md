@@ -49,7 +49,7 @@ ECS Fargate (Celery Worker)
 ## 📂 Repository Structure
 
 
-
+```
 devops-assignment/
 ├── backend/
 │   ├── main.py
